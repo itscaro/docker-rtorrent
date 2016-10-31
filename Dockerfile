@@ -37,7 +37,7 @@ RUN curl -o rutorrent.zip -L https://github.com/Novik/ruTorrent/archive/master.z
         -e "/php/ s/''/'\/usr\/bin\/php7'/" \
         /rutorrent/conf/config.php
 
-ADD supervisord.conf /etc/supervisor.d/supervisord.conf
+ADD supervisord.conf /etc/supervisor.d/supervisord.ini
 
 ADD nginx.conf /etc/nginx/nginx.conf
 
