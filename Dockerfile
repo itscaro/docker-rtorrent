@@ -19,7 +19,7 @@ RUN apk add --update --repository http://dl-cdn.alpinelinux.org/alpine/edge/comm
 
 RUN curl -o rutorrent.zip -L https://github.com/Novik/ruTorrent/archive/master.zip \
     && unzip rutorrent.zip -d /tmp/ && mv /tmp/ruTorrent-master /rutorrent && rm rutorrent.zip \
-    && mkdir -p /tmp/nginx/client-body /downloads/incoming /downloads/completed /downloads/watched /downloads/sessions /tmp/rtorrent \
+    && mkdir -p /tmp/nginx/client-body /downloads/.rtorrent/watch /downloads/.rtorrent/sessions /tmp/rtorrent \
     && adduser -D -h / -u 5001 rtorrent \
     && chown -R rtorrent:rtorrent /downloads /rutorrent /tmp/rtorrent /var/lib/nginx \
     && sed -i \
@@ -37,14 +37,14 @@ RUN curl -o rutorrent.zip -L https://github.com/Novik/ruTorrent/archive/master.z
         -e "/php/ s/''/'\/usr\/bin\/php7'/" \
         /rutorrent/conf/config.php
 
-ADD supervisord.conf /etc/supervisor.d/supervisord.ini
+ADD rtorrent.conf /downloads/.rtorrent/.rtorrent.rc
 
 ADD default.nginx.conf /etc/nginx/conf.d/default.conf
 ADD nginx.conf /etc/nginx/nginx.conf
 
-ADD rtorrent.conf /.rtorrent.rc
+ADD supervisord.conf /etc/supervisor.d/supervisord.ini
 
-ADD init.sh /init.sh
+ADD startup /root/startup
 
 VOLUME /downloads /rutorrent /etc/nginx/conf.d
 
