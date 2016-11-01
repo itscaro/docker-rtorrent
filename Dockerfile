@@ -39,11 +39,12 @@ RUN curl -o rutorrent.zip -L https://github.com/Novik/ruTorrent/archive/master.z
 
 ADD supervisord.conf /etc/supervisor.d/supervisord.ini
 
+ADD default.nginx.conf /etc/nginx/conf.d/default.conf
 ADD nginx.conf /etc/nginx/nginx.conf
 
 ADD rtorrent.conf /.rtorrent.rc
 
-ADD run.sh /run.sh
+ADD init.sh /init.sh
 
 VOLUME /downloads /rutorrent /etc/nginx/conf.d
 
