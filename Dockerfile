@@ -43,6 +43,8 @@ ADD nginx.conf /etc/nginx/nginx.conf
 
 ADD rtorrent.conf /.rtorrent.rc
 
+ADD run.sh /run.sh
+
 VOLUME /downloads /rutorrent /etc/nginx/conf.d
 
 EXPOSE 80 5000 6881 51413
